@@ -1,0 +1,58 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>The HTML5 Canvas</title>  
+</head>  
+<style>
+    body, html {/*画布居中*/
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+<body>  
+    <canvas id="myCanvas" width="400" height="400" style="background-color: rgb(144, 238, 144);">  
+        Canvas is not supported on this browser   
+    </canvas>  
+    <script>  
+        let can = document.getElementById('myCanvas');  
+        if (can.getContext) {  
+            var ctx = can.getContext('2d');  
+  
+            // 绘制脸部  
+            ctx.beginPath();  
+            ctx.arc(200, 200, 160, 0, Math.PI * 2, true);  
+            ctx.fillStyle = "#ff0";  
+            ctx.fill();  
+            ctx.stroke();  
+  
+            // 绘制眼睛  
+            ctx.beginPath();  
+            ctx.arc(130, 160, 15, 0, Math.PI * 2, true);  
+            ctx.arc(260, 160, 15, 0, Math.PI * 2, true);  
+            ctx.fillStyle = "#000";  
+            ctx.fill();  
+  
+            // 绘制鼻子  
+            ctx.beginPath();  
+            ctx.moveTo(195, 190);  
+            ctx.lineTo(195, 240);  
+            ctx.stroke();  
+  
+            // 绘制嘴巴
+            ctx.beginPath();  
+            ctx.ellipse(200, 250, 100, 60, 0, 7, Math.PI*0.8);
+            ctx.stroke(); // 描边  
+
+            ctx.font = '25px Arial'; // 设置字体大小和类型
+            ctx.fillStyle = 'rgb(0, 82, 0)';// 设置填充颜色
+            ctx.fillText('The Canvas brought me to life!', 25, 385); // 在指定位置填充文本
+
+        }  
+    </script>  
+</body>  
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO-DO List wuth Local Storage</title>
+</head>
+<body>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+
+    <script>
+    // Load tasks from Local Storage
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    // Display tasks
+    const taskList = document.getElementById('taskList');
+    tasks.forEach(task => {
+        taskList.innerHTML += `<li>${task} <button onclick="removeTask('${task}')">Remove</button></li>`;
+    });
+
+    // Add task
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const task = taskInput.value.trim();
+        if (task) {
+        tasks.push(task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        displayTasks();
+        taskInput.value = '';
+        }
+    }
+
+    // Remove task
+    function removeTask(task) {
+    const index = tasks.indexOf(task);
+    if (index > -1) {
+        tasks.splice(index, 1);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        displayTasks();
+    }
+    }
+
+    // Display tasks
+    function displayTasks() {
+    const taskList = document.getElementById('taskList');
+    taskList.innerHTML = '';
+    tasks.forEach(task => {
+        taskList.innerHTML += `<li>${task} <button onclick="removeTask('${task}')">Remove</button></li>`;
+    });
+    }
+    </script>
+    
+</body>
+</html>
